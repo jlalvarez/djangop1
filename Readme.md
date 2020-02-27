@@ -174,7 +174,10 @@ En la plantilla renderizar con {{ }}, por ejemplo el vista.html
 
 <h1>Alta usuario</h1>
 
-{{ form }}
+<form method="POST" action="">{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Registrar" />
+</form>
 
 
 ... continuará ...
