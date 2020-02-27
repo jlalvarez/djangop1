@@ -78,13 +78,103 @@ admin.site.register(Usuario)
 ### Personalizar la interfaz
 
 class AdminUsuario(admin.ModelAdmin):
-    list_display = ["__str__", "nombre", "timestamp"]
+    list_display = ["__str__", "nombre", "emai", "timestamp"]
+    list_filter = ["timestamp"]
+    list_editable = ["email"]
+    search_fields = ["nombre", "email"]
     class Meta:
         model = Usuario
 
 
 admin.site.register(Usuario, AdminUsuario)
 
+
+
+## Crear una vista
+
+En el fichero views.py incluir:
+
+def inicio(request):
+    return render(request, "vista.html", contexto)
+
+
+## Crear template
+En el fiichero nombre_proy/settings.py se incluyen las rutas a los templates en la sección DIRS
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+Para crear una ruta usamos: os.path.join(BASE_DIR, ...)
+
+Por ejemplo, incluimos:
+
+TEMPLATES = [
+    {
+    ,,,
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
+    ...
+]
+
+En la ruta será necesario crear las vistas
+ ../templates/vista.html
+
+
+## Asociar una URL a una acción
+
+En el fichero nombre_proy/urls.py añadir:
+
+from boletin import views
+
+urlpatterns = [
+    ...
+    path('', views.inicio, name='home')
+]
+
+
+
+
+## Crear Formularios
+
+En la app crear un fichero form.py y añadir:
+
+from django import forms
+
+class SingupForm(forms.Form):
+    nombre = forms.CharField(max_length=100)
+    email = forms.CharField(max_length=100)
+
+
+### Añadir a una vista
+
+En views.py, importar el formulario e incluir en la acción correspodiente:
+
+from .forms import SingupForm
+
+def inicio(request):
+    form = SingupForm()
+    contexto = {
+        "form": form,
+    }
+    return render(request, "vista.html", contexto)
+
+En la plantilla renderizar con {{ }}, por ejemplo el vista.html
+
+<h1>Alta usuario</h1>
+
+{{ form }}
 
 
 ... continuará ...
