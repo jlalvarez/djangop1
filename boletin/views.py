@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from .models import Usuario
+
 # Create your views here.
 
 from .forms import SingupForm
@@ -9,8 +11,16 @@ def inicio(request):
     print(dir(form))
     if form.is_valid():
         form_data = form.cleaned_data
-        print(form_data.get("nombre"))
-        print(form_data.get("email"))
+        nombreForm = form_data.get("nombre")
+        emailForm = form_data.get("email")
+        u = Usuario.objects.create(nombre=nombreForm, email=emailForm)
+        
+        # Otra opción
+        # u = Usuario()
+        # u.nombre = nombreForm
+        # u.email = emailForm
+        # u.save()
+        
         
     contexto = {
         "form": form,

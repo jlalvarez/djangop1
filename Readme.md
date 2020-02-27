@@ -181,6 +181,7 @@ urlpatterns = [
 
 
 ## Crear Formularios
+https://docs.djangoproject.com/en/3.0/topics/forms/
 
 En la app crear un fichero form.py y añadir:
 
