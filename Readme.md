@@ -3,8 +3,10 @@
 
 //TO DO
 Instalar Python
+
 //TO DO
 Instalar pip 
+
 //TO DO
 Instalar Django
 
@@ -25,8 +27,9 @@ $ python manage.py runserver 0:8000
 Acceder al proyecto: http://ip-maquina:8080
 
 ## Crear un superusuario
+```
 $ python manage.py createsuperuser
-
+```
 Acceder al administración:  http://ip-maquina:8080/admin
 
 
@@ -151,7 +154,7 @@ Por ejemplo, incluimos:
 ```python
 TEMPLATES = [
     {
-    ,,,
+    ...
         'DIRS': [os.path.join(BASE_DIR, "templates")],
     ...
 ]
