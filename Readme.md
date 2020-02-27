@@ -34,7 +34,8 @@ Acceder al administración:  http://ip-maquina:8080/admin
 
 
 
-## Crear App. Un proyecto puede tener varias App
+## Crear App.
+Un proyecto puede tener varias App
 ```
 $ python manage.py startapp <nombre_APP>
 ```
