@@ -161,6 +161,7 @@ class SingupForm(forms.Form):
 
 En views.py, importar el formulario e incluir en la acción correspodiente:
 
+```python
 from .forms import SingupForm
 
 def inicio(request):
@@ -169,6 +170,7 @@ def inicio(request):
         "form": form,
     }
     return render(request, "vista.html", contexto)
+```
 
 En la plantilla renderizar con {{ }}, por ejemplo el vista.html
 
