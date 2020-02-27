@@ -69,14 +69,16 @@ Crear objetos:  u1 = Usuario.objects.create(nombre='Pepe',email='pepe@mail.com')
 
 En el fichero admin.py: importamos el modelo y lo registramos
 
+```python
 from .models import Usuario
 
 admin.site.register(Usuario)
-
+```
 
 
 ### Personalizar la interfaz
 
+```python
 class AdminUsuario(admin.ModelAdmin):
     list_display = ["__str__", "nombre", "emai", "timestamp"]
     list_filter = ["timestamp"]
@@ -87,7 +89,7 @@ class AdminUsuario(admin.ModelAdmin):
 
 
 admin.site.register(Usuario, AdminUsuario)
-
+```
 
 
 ## Crear una vista
@@ -101,6 +103,7 @@ def inicio(request):
 ## Crear template
 En el fiichero nombre_proy/settings.py se incluyen las rutas a los templates en la sección DIRS
 
+```python
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -116,17 +119,20 @@ TEMPLATES = [
         },
     },
 ]
+```
 
 Para crear una ruta usamos: os.path.join(BASE_DIR, ...)
 
 Por ejemplo, incluimos:
 
+```python
 TEMPLATES = [
     {
     ,,,
         'DIRS': [os.path.join(BASE_DIR, "templates")],
     ...
 ]
+```
 
 En la ruta será necesario crear las vistas
  ../templates/vista.html
@@ -138,11 +144,12 @@ En el fichero nombre_proy/urls.py añadir:
 
 from boletin import views
 
+```python
 urlpatterns = [
     ...
     path('', views.inicio, name='home')
 ]
-
+```
 
 
 
@@ -150,11 +157,13 @@ urlpatterns = [
 
 En la app crear un fichero form.py y añadir:
 
+```python
 from django import forms
 
 class SingupForm(forms.Form):
     nombre = forms.CharField(max_length=100)
     email = forms.CharField(max_length=100)
+```
 
 
 ### Añadir a una vista
